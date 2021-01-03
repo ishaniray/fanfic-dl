@@ -9,7 +9,8 @@
 
     node main.js <-story-id-> <-download-location->
 
- Example (on a Windows computer): 
+ Example (on a Windows computer):
+
     node main.js 13768498 C:\Users\ishaniray\Desktop
 
  [Note: <-download-location-> is an optional argument. If not provided, the story will be downloaded to the project's root folder.]
