@@ -1,0 +1,15 @@
+{
+  "name": "fanfic-dl",
+  "version": "1.0.0",
+  "description": "An open-source command-line utility to download stories from fanfiction.net under Cloudflare restrictions using Puppeteer.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ishani Ray",
+  "license": "ISC",
+  "dependencies": {
+    "epub-gen": "^0.1.0",
+    "puppeteer": "^5.5.0"
+  }
+}
