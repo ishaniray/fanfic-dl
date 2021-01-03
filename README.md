@@ -9,7 +9,7 @@
 
     node main.js <-story-id-> <-download-location->
 
- Example (on a Windows computer):
+ **Example (on a Windows computer):**
 
     node main.js 13768498 C:\Users\ishaniray\Desktop
 
