@@ -13,7 +13,7 @@
 
     node main.js 13768498 C:\Users\ishaniray\Desktop
 
- [Note: <-download-location-> is an optional argument. If not provided, the story will be downloaded to the project's root folder.]
+ [Note: _<-download-location->_ is an optional argument. If not provided, the story will be downloaded to the project's root folder.]
 
  ### Future Scope
  I have not been able to make headless Puppeteer work with the code I have currently. While this doesn't hamper the tool's functionality, visually, I feel having a Chromium window pop up and close every two seconds for as many times as there are number of chapters in the story, is a bit jarring. I plan to work on this - and maybe even a more permanent, efficient solution - soon.
