@@ -17,7 +17,10 @@ if (process.argv.length > 3) {
 }
 
 (async () => {
+    var browser;
     try {
+        let userAgent = '';
+
         let commencementTimeInMs = performance.now();
 
         const sections = [];
@@ -30,8 +33,12 @@ if (process.argv.length > 3) {
         for (var chaptersScraped = 0; chaptersScraped < numberOfChapters; ++chaptersScraped) {
             let currentChapter = chaptersScraped + 1;
 
-            let browser = await puppeteer.launch({ headless: false }); // need to open a new browser instance at every pass due to Cloudflare restrictions
+            browser = await puppeteer.launch(); // need to open a new browser instance at every pass due to Cloudflare restrictions
+            if (currentChapter == 1) {
+                userAgent = await browser.userAgent();
+            }
             let page = await browser.newPage();
+            page.setUserAgent(userAgent.replace('Headless', '')); // since Cloudflare is blocking headless Chrome, remove 'Headless' from UA header value
             await page.goto(`${url}/${currentChapter}`, { waitUntil: 'load' });
 
             if (currentChapter == 1) {
@@ -122,12 +129,16 @@ if (process.argv.length > 3) {
 
         let completionTimeInMs = performance.now();
         let processingTimeInMs = completionTimeInMs - commencementTimeInMs;
-        console.log(`Time taken: ${(processingTimeInMs / 1000).toFixed(1)} seconds`);
+        console.log(`Time taken to download story: ${(processingTimeInMs / 1000).toFixed(1)} seconds`);
+        return Promise.resolve('Request completed successfully.');
     } catch (error) {
         console.error(`Error: ${error.message}. Please contact github.com/ishaniray if the issue persists.`);
+        return Promise.resolve('Request completed with errors.');
     } finally {
         if (typeof browser !== 'undefined') {
             await browser.close();
         }
     }
-})();
+})().then((status) => {
+    console.log(status);
+});
