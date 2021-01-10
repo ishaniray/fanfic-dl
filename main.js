@@ -45,7 +45,11 @@ if (process.argv.length > 3) {
                 console.log("Gathering metadata...");
 
                 // Scrape story name
-                storyName = await page.evaluate(() => {
+                storyName = await page.evaluate(async () => {
+                    while (document.querySelectorAll('b.xcontrast_txt').length === 0) {
+                        console.log("Waiting out Cloudflare advanced DDoS check...");
+                        await new Promise(resolve => setTimeout(resolve, 5000));
+                    }
                     return document.querySelectorAll('b.xcontrast_txt')[0].innerText;
                 });
                 console.log(`Title of the story: ${storyName}`);
@@ -88,7 +92,11 @@ if (process.argv.length > 3) {
 
             // Scrape chapters 1 to n
             console.log(`Downloading Chapter ${currentChapter}: ${url}/${currentChapter}`);
-            let chapterTitle = await page.evaluate(() => {
+            let chapterTitle = await page.evaluate(async () => {
+                while (document.querySelectorAll('b.xcontrast_txt').length === 0) {
+                    console.log("Waiting out Cloudflare advanced DDoS check...");
+                    await new Promise(resolve => setTimeout(resolve, 5000));
+                }
                 let chapterTitles = document.getElementById("chap_select");
                 if (chapterTitles === null) {
                     return "One";
